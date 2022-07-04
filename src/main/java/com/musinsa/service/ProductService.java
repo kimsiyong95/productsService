@@ -2,15 +2,15 @@ package com.musinsa.service;
 
 import com.musinsa.common.ProductRequestDTO;
 import com.musinsa.common.ResponseDTO;
-import com.musinsa.repository.ProductsRepository;
+import com.musinsa.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ProductsService {
-    private final ProductsRepository productsRepository;
+public class ProductService {
+    private final ProductRepository productsRepository;
 
 
     public ResponseDTO getByCategoryLowestPrice(){

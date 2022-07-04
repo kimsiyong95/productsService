@@ -2,7 +2,7 @@ package com.musinsa.controller;
 
 import com.musinsa.common.HttpStatusCustom;
 import com.musinsa.common.ProductRequestDTO;
-import com.musinsa.service.ProductsService;
+import com.musinsa.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -12,9 +12,9 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-public class ProductsRestController {
+public class ProductRestController {
 
-    private final ProductsService productsService;
+    private final ProductService productsService;
 
 
     @GetMapping("/byCategoryLowestPrice")
