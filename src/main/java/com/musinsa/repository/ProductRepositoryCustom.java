@@ -1,10 +1,16 @@
 package com.musinsa.repository;
 
-import com.musinsa.domain.Product;
+import com.musinsa.common.response.BrandLowestPriceDTO;
+import com.musinsa.common.response.CategoryLowestPriceDTO;
+import com.musinsa.common.response.CategoryMaxMinPriceDTO;
 
 import java.util.List;
 
 public interface ProductRepositoryCustom {
 
-    public List<Product> byCategoryLowestPrice();
+    public List<CategoryLowestPriceDTO> categoryLowestPrice();
+
+    public BrandLowestPriceDTO brandLowestPrice();
+
+    public CategoryMaxMinPriceDTO categoryMaxMinPrice(String categoryNm);
 }

@@ -1,4 +1,4 @@
-package com.musinsa.common;
+package com.musinsa.common.request;
 
 import javax.validation.constraints.NotEmpty;
 

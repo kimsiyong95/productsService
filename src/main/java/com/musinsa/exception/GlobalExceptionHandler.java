@@ -1,6 +1,6 @@
 package com.musinsa.exception;
 
-import com.musinsa.common.ResponseDTO;
+import com.musinsa.common.response.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
