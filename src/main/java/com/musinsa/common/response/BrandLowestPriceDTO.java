@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
 public class BrandLowestPriceDTO {
     private String branNm;
     private Long price;

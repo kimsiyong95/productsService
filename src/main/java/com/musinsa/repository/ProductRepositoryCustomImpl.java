@@ -6,11 +6,15 @@ import com.musinsa.common.response.CategoryMaxMinPriceDTO;
 import com.musinsa.domain.Product;
 import com.musinsa.domain.QCategory;
 import com.musinsa.domain.QProduct;
+import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
+import com.querydsl.core.types.dsl.StringPath;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.querydsl.jpa.JPAExpressions.select;
@@ -63,7 +67,33 @@ public class ProductRepositoryCustomImpl extends QuerydslRepositorySupport imple
     }
 
     @Override
-    public CategoryMaxMinPriceDTO categoryMaxMinPrice(String categoryNm) {
-        return null;
+    public List<CategoryMaxMinPriceDTO> categoryMaxMinPrice(String categoryNm) {
+        List<CategoryMaxMinPriceDTO> result = new ArrayList<>();
+
+        result.add(queryFactory
+                .select(Projections.constructor(CategoryMaxMinPriceDTO.class,
+                        qProduct.brandNm,
+                        qProduct.price,
+                        Expressions.asString("min")))
+                .from(qProduct)
+                .join(qProduct.category, qCategory)
+                .where(qCategory.categoryNm.eq(categoryNm))
+                .orderBy(qProduct.price.asc())
+                .limit(1)
+                .fetchOne());
+
+        result.add(queryFactory
+                .select(Projections.constructor(CategoryMaxMinPriceDTO.class,
+                        qProduct.brandNm,
+                        qProduct.price,
+                        Expressions.asString("max")))
+                .from(qProduct)
+                .join(qProduct.category, qCategory)
+                .where(qCategory.categoryNm.eq(categoryNm))
+                .orderBy(qProduct.price.desc())
+                .limit(1)
+                .fetchOne());
+
+        return result;
     }
 }

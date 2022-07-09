@@ -1,18 +1,24 @@
 package com.musinsa.common.request;
 
-import javax.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Getter
+@Setter
 public class ProductRequestDTO {
 
     private Long productId;
 
-    @NotEmpty
+    @NotNull
     private Long categoryId;
 
-    @NotEmpty
+    @NotNull
     private String brandNm;
 
-    @NotEmpty
+    @NotNull
     private Long price;
 
 }

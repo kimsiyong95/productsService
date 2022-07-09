@@ -12,5 +12,5 @@ public interface ProductRepositoryCustom {
 
     public BrandLowestPriceDTO brandLowestPrice();
 
-    public CategoryMaxMinPriceDTO categoryMaxMinPrice(String categoryNm);
+    public List<CategoryMaxMinPriceDTO> categoryMaxMinPrice(String categoryNm);
 }

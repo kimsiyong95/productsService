@@ -48,15 +48,22 @@ public class ProductRestController {
     }
 
     @PutMapping("/products/{productId}")
-    public ResponseEntity updateProducts(@Valid @RequestBody ProductRequestDTO productRequestDTO, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public ResponseEntity updateProducts(@Valid @RequestBody ProductRequestDTO productRequestDTO
+            , BindingResult bindingResult
+            , @PathVariable(required = false) String productId){
+
+        if(bindingResult.hasErrors()||!StringUtils.hasText(productId)){
             throw new IllegalArgumentException(HttpStatusCustom.USER_PARAM_ERROR.getMessage());
         }
-        return ResponseEntity.ok().body(productsService.updateProducts(productRequestDTO));
+        return ResponseEntity.ok().body(productsService.updateProducts(productRequestDTO, productId));
     }
 
     @DeleteMapping("/products/{productId}")
-    public ResponseEntity deleteProducts(@PathVariable("productId") String productId){
+    public ResponseEntity deleteProducts(@PathVariable(required = false) String productId){
+        if(!StringUtils.hasText(productId)){
+            throw new IllegalArgumentException(HttpStatusCustom.USER_PARAM_ERROR.getMessage());
+        }
+
         return ResponseEntity.ok().body(productsService.deleteProducts(productId));
     }
 
