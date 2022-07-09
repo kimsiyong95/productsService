@@ -1,11 +1,10 @@
 package com.musinsa.common.response;
 
 
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Getter
 public class CategoryLowestPriceDTO {
@@ -22,11 +21,10 @@ public class CategoryLowestPriceDTO {
 
 
     public static Long totalPrice(List<CategoryLowestPriceDTO> list){
-        Long totalPrice = 0L;
+        AtomicReference<Long> totalPrice = new AtomicReference<>(0L);
 
-        for(CategoryLowestPriceDTO dto : list){
-            totalPrice+=dto.getPrice();
-        }
-        return totalPrice;
+        list.forEach(dto -> {totalPrice.updateAndGet(v -> v + dto.getPrice());});
+
+        return totalPrice.get();
     }
 }
